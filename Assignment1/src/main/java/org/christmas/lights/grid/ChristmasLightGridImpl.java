@@ -6,7 +6,6 @@ package org.christmas.lights.grid;
  */
 public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	 private Light[][] grid;
-	 private LightOnCounter lightCounter;
 	/**
 	  * create a light grid for given coordinates
 	  * @param rows
@@ -15,7 +14,7 @@ public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	 public ChristmasLightGridImpl(int rows, int columns) {
 	     grid = new Light[rows][columns];
 	     initializeGrid();
-	     lightCounter=new LightOnCounterImpl();
+
 	 }
 /**
  * initialize the grid 
@@ -27,27 +26,7 @@ public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	         }
 	     }
 	 }
-	 
-	 /**
-	  * toggle light for given coordinates
-	  * @param row
-	  * @param column
-	  */
 
-	 public void toggleLight(int row, int column) {
-	     if (isValidCoordinate(row, column)) {
-	    	 Light light = grid[row][column];
-	         if (light != null) {
-	             if (light.isOn()) {
-	                 light.turnOff();
-	                 lightCounter.decrementLightOnCount();
-	             } else {
-	                 light.turnOn();
-	                 lightCounter.incrementLightOnCount();
-	             }
-	         }
-	     }
-	 }
 	 /**
 	  * Switch on light
 	  * @param row
@@ -59,7 +38,7 @@ public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	         if (light != null) {
 	             if (!light.isOn()) {
 	            	 light.turnOn();
-	            	 lightCounter.incrementLightOnCount();
+
 	             }
 	         }
 	     }
@@ -76,15 +55,13 @@ public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	         if (light != null) {
 	             if (light.isOn()) {
 	            	 light.turnOff();
-	            	 lightCounter.decrementLightOnCount();
+
 	             }
 	         }
 	     }
 	 }
 	 
-	 public Integer getLightOnCount() {
-			return lightCounter.getLightOnCount();
-		}
+
 	
 	 /**
 	  * check the given coordinate is valid
@@ -96,10 +73,9 @@ public class ChristmasLightGridImpl implements ChristmasLightGrid{
 	 private boolean isValidCoordinate(int row, int column) {
 	     return row >= 0 && row < grid.length && column >= 0 && column < grid[row].length;
 	 }
-	 
-	 
-	
-	
-	 
-	 
+
+
+	public Light[][] getGrid() {
+		return grid;
 	}
+}
